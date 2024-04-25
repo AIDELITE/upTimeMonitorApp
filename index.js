@@ -21,7 +21,9 @@ const server = http.createServer(function(req,res){
     const method = req.method.toLocaleLowerCase();
 
     //get headers an an object
-    
+    const headers = req.headers;
+
+    //get the payload
 
     //getting query string as an object
     const queryStringObject = parsedUrl.query;
@@ -30,7 +32,8 @@ const server = http.createServer(function(req,res){
     res.end("<h1>Hello there welcome</h1>");
 
     //log the request path
-    console.log("Request is receive on path :"+trimmedPath+" with method: "+method+" with query string params:" ,queryStringObject);
+    console.log("Logged with this headers: ",headers);
+    //console.log("Request is receive on path :"+trimmedPath+" with method: "+method+" with query string params:" ,queryStringObject);
 })
 
 //start the server and have it listened to a port :3000
