@@ -10,7 +10,20 @@ const url = require('url');
 
 //the server should respond to all requests with a string
 const server = http.createServer(function(req,res){
-    res.end("<h1>Hello there</h1>");
+    //Get URL and Parse it
+    const parsedUrl = url.parse(req.url, true);
+
+    //Get the path
+    const path = parsedUrl.pathname; //this gets the un trimmed path that the user requested
+    const trimmedPath = path.replace(/˄\/+|\/+$/g,'');
+
+    //get http method
+
+    //Send the Response
+    res.end("<h1>Hello there welcome</h1>");
+
+    //log the request path
+    console.log("Request is receive on path :"+trimmedPath);
 })
 
 //start the server and have it listened to a port :3000
