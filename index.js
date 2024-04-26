@@ -15,8 +15,8 @@ const server = http.createServer(function (req, res) {
     const parsedUrl = url.parse(req.url, true);
 
     //Get the path
-    const path = parsedUrl.pathname; //this gets the un trimmed path that the user requested
-    const trimmedPath = path.replace(/˄\/+|\/+$/g, '');
+    var path = parsedUrl.pathname; //this gets the un trimmed path that the user requested
+    var trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
     //get http method
     const method = req.method.toLocaleLowerCase();
@@ -36,7 +36,8 @@ const server = http.createServer(function (req, res) {
         buffer += decoder.end();
 
         //chose which handler this request should go to, else go to Not found handler.
-        var chosenHandler = typeof(route[trimmedPath]) !==undefined? route[trimmedPath]: handlers.notFound;
+        var chosenHandler = typeof(route[trimmedPath]) !=='undefined'? route[trimmedPath]: handlers.notFound;
+        
 
         //construct a data object that will be sent to the handler
         var data = {
@@ -56,12 +57,15 @@ const server = http.createServer(function (req, res) {
             payload = typeof(payload) == 'object'? payload : {};
 
             //convert payload to string
+            var payloadString = JSON.stringify(payload);
+
+            //return the response
+            res.writeHead(statusCode);
+            res.end(payloadString);
+            console.log("We are Returning this response: ",statusCode,payloadString);
         });
 
-        //Send the Response
-        res.end("<h1>Hello there welcome</h1>");
         //log the request path
-        console.log("Logged with this payload data: ",buffer);
     })
 
     //getting query string as an object
