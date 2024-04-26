@@ -103,10 +103,10 @@ const unifiedServer = function(req, res){
 //defind handlers
 var handlers = {};
 
-//explan handler
-handlers.explan = function(data,callback){
+//ping handler
+handlers.ping = function(data,callback){
     //callback a http status code and a payload
-    callback(406,{'name':'this is a callback payload'});
+    callback(200);
 }
 
 //define the Not Found handler
@@ -116,5 +116,5 @@ handlers.notFound = function(data,callback){
 
 //this object will define a request router
 var route = {
-    'explan': handlers.explan,
+    'ping': handlers.ping,
 }
