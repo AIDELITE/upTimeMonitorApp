@@ -35,6 +35,18 @@ const server = http.createServer(function (req, res) {
     req.on('end', function () {
         buffer += decoder.end();
 
+        //chose which handler this request should go to, else go to Not found handler.
+        var chosenHandler = typeof(route[trimmedPath]) !==undefined? route[trimmedPath]: handlers.notFound;
+
+        //construct a data object that will be sent to the handler
+        var data = {
+            'trimmedPath': trimmedPath,
+            'queryStringObject': queryStringObject,
+            'method': method,
+            'headers': headers,
+            'payload': buffer
+        }
+
         //Send the Response
         res.end("<h1>Hello there welcome</h1>");
         //log the request path
@@ -42,7 +54,7 @@ const server = http.createServer(function (req, res) {
     })
 
     //getting query string as an object
-    //const queryStringObject = parsedUrl.query;
+    const queryStringObject = parsedUrl.query;
 
 
     //console.log("Request is receive on path :"+trimmedPath+" with method: "+method+" with query string params:" ,queryStringObject);
@@ -52,4 +64,23 @@ const server = http.createServer(function (req, res) {
 
 server.listen(3000, function () {
     console.log("The server is listening to port 3000 now");
-})
+});
+
+//defind handlers
+var handlers = {};
+
+//explan handler
+handlers.explan = function(data,callback){
+    //callback a http status code and a payload
+    callback(406,{'name':'this is a callback payload'});
+}
+
+//define the Not Found handler
+handlers.notFound = function(data,callback){
+    callback(404); //this doesn't need a payload
+}
+
+//this object will define a request router
+var route = {
+    'explan': handlers.explan,
+}
