@@ -8,6 +8,7 @@
 const http = require('http');
 const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
+var config = require('./config');
 
 //the server should respond to all requests with a string
 const server = http.createServer(function (req, res) {
@@ -60,6 +61,7 @@ const server = http.createServer(function (req, res) {
             var payloadString = JSON.stringify(payload);
 
             //return the response
+            res.setHeader('Content-Type','application/json');
             res.writeHead(statusCode);
             res.end(payloadString);
             console.log("We are Returning this response: ",statusCode,payloadString);
@@ -75,10 +77,10 @@ const server = http.createServer(function (req, res) {
     //console.log("Request is receive on path :"+trimmedPath+" with method: "+method+" with query string params:" ,queryStringObject);
 })
 
-//start the server and have it listened to a port :3000
+//start the server and have it listened the port from the configs
 
-server.listen(3000, function () {
-    console.log("The server is listening to port 3000 now");
+server.listen(config.port, function () {
+    console.log(`The server is listening to port ${config.port} now and running on ${config.envName} Environment`);
 });
 
 //defind handlers
