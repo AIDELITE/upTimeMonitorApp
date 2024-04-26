@@ -47,6 +47,17 @@ const server = http.createServer(function (req, res) {
             'payload': buffer
         }
 
+        //route the request specified in the handler
+        chosenHandler(data,function(statusCode,payload){
+            //Specify the default statusCode that will be displayed incase the handler does not return one : 200
+            statusCode = typeof(statusCode) == 'number'? statusCode : 200;
+
+            //specify the dault payload that will be displayed incase the handler does not return any.
+            payload = typeof(payload) == 'object'? payload : {};
+
+            //convert payload to string
+        });
+
         //Send the Response
         res.end("<h1>Hello there welcome</h1>");
         //log the request path
