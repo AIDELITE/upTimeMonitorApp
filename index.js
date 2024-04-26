@@ -6,12 +6,39 @@
 //dependencies
 
 const http = require('http');
+const https = require('https');
 const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
+var fs = require('fs');
 
-//the server should respond to all requests with a string
-const server = http.createServer(function (req, res) {
+//create http server
+const httpServer = http.createServer(function (req, res) {
+    unifiedServer(req,res);
+});
+
+//create Https server
+var httpsServerOptions = {
+    'key': fs.readFileSync('./https/key.pem'),
+    'cert': fs.readFileSync('./https/cert.pem')
+};
+const httpsServer = https.createServer(httpsServerOptions,function (req, res) {
+    unifiedServer(req,res);
+})
+
+//Instantiating the http server
+httpServer.listen(config.httpPort, function () {
+    console.log(`The Http server is listening to port ${config.httpPort} now`);
+});
+
+
+//Instantiating the http server
+httpsServer.listen(config.httpsPort, function () {
+    console.log(`The Https server is listening to port ${config.httpsPort} now`);
+});
+
+//all the server logic for the http and https
+const unifiedServer = function(req, res){
     //Get URL and Parse it
     const parsedUrl = url.parse(req.url, true);
 
@@ -38,7 +65,6 @@ const server = http.createServer(function (req, res) {
 
         //chose which handler this request should go to, else go to Not found handler.
         var chosenHandler = typeof(route[trimmedPath]) !=='undefined'? route[trimmedPath]: handlers.notFound;
-        
 
         //construct a data object that will be sent to the handler
         var data = {
@@ -72,16 +98,7 @@ const server = http.createServer(function (req, res) {
 
     //getting query string as an object
     const queryStringObject = parsedUrl.query;
-
-
-    //console.log("Request is receive on path :"+trimmedPath+" with method: "+method+" with query string params:" ,queryStringObject);
-})
-
-//start the server and have it listened the port from the configs
-
-server.listen(config.port, function () {
-    console.log(`The server is listening to port ${config.port} now and running on ${config.envName} Environment`);
-});
+}
 
 //defind handlers
 var handlers = {};

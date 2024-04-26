@@ -8,13 +8,15 @@ var environments = {};
 
 //create stagging (default environment)
 environments.staging = {
-    'port' : 2000,
+    'httpPort' : 2000,
+    'httpsPort' :2001,
     'envName': 'staging'
 };
 
 //create the production environment
 environments.production = {
-    'port' : 4000,
+    'httpPort' : 4000,
+    'httpsPort' :4001,
     'envName': 'production'
 };
 
