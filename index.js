@@ -56,6 +56,9 @@ const unifiedServer = function(req, res){
     var decoder = new stringDecoder('utf-8');
     var buffer = '';
 
+    //getting query string as an object
+    const queryStringObject = parsedUrl.query;
+
     req.on('data', function (data) {
         buffer += decoder.write(data);
     })
@@ -96,8 +99,6 @@ const unifiedServer = function(req, res){
         //log the request path
     })
 
-    //getting query string as an object
-    const queryStringObject = parsedUrl.query;
 }
 
 //defind handlers
