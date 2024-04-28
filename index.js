@@ -11,16 +11,6 @@ const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 var fs = require('fs');
-var _data = require('./lib/data');
-
-//TEST
-
-_data.update('test','Newfile',{'trillion':'has 12 digits'},function(err){
-    console.log("The error was: ",err);
-
-})
-
-// @TODO DELETE AFTER
 
 //create http server
 const httpServer = http.createServer(function (req, res) {
