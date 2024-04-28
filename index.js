@@ -15,8 +15,8 @@ var _data = require('./lib/data');
 
 //TEST
 
-_data.read('test','Newfile',function(err,data){
-    console.log("The error was: ",err, 'This was the data ',data);
+_data.update('test','Newfile',{'trillion':'has 12 digits'},function(err){
+    console.log("The error was: ",err);
 
 })
 
