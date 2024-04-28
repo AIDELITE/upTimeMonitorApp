@@ -11,6 +11,16 @@ const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 var fs = require('fs');
+var _data = require('./lib/data');
+
+//TEST
+
+_data.read('test','Newfile',function(err,data){
+    console.log("The error was: ",err, 'This was the data ',data);
+
+})
+
+// @TODO DELETE AFTER
 
 //create http server
 const httpServer = http.createServer(function (req, res) {
