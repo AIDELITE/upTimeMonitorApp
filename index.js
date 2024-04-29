@@ -11,6 +11,8 @@ const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 var fs = require('fs');
+var handlers = require('./lib/handlers');
+
 
 //create http server
 const httpServer = http.createServer(function (req, res) {
@@ -99,20 +101,6 @@ const unifiedServer = function(req, res){
         //log the request path
     })
 
-}
-
-//defind handlers
-var handlers = {};
-
-//ping handler
-handlers.ping = function(data,callback){
-    //callback a http status code and a payload
-    callback(200);
-}
-
-//define the Not Found handler
-handlers.notFound = function(data,callback){
-    callback(404); //this doesn't need a payload
 }
 
 //this object will define a request router
