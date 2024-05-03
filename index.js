@@ -12,6 +12,7 @@ const stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 var fs = require('fs');
 var handlers = require('./lib/handlers');
+var helpers = require('./lib/helpers');
 
 
 //create http server
