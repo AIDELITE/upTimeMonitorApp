@@ -14,6 +14,11 @@ var fs = require('fs');
 var handlers = require('./lib/handlers');
 var helpers = require('./lib/helpers');
 
+//@TODO: REmove this after. its just for testing
+helpers.sendTwilioSMS('2178820077','Hello, this is a twilio message',(err)=>{
+    console.log("This was the error",err);
+})
+
 
 //create http server
 const httpServer = http.createServer(function (req, res) {

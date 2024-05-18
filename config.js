@@ -12,7 +12,12 @@ environments.staging = {
     'httpsPort' :2001,
     'envName': 'staging',
     'hashingSecret': 'ABfCy0jn',
-    'maxChecks':5
+    'maxChecks':5,
+    'twilio':{
+        'accountSid':'AC6efc26a21225f3187704a5423a363b74',
+        'authToken': '045814de6ba224840f5fd98463522995',
+        'fromPhone': '+12178820077'
+    }
 };
 
 //create the production environment
@@ -21,8 +26,14 @@ environments.production = {
     'httpsPort' :4001,
     'envName': 'production',
     'hashingSecret': 'ABfCy0jn',
-    'maxChecks':5
+    'maxChecks':5,
+    'twilio':{
+        'accountSid':'AC6efc26a21225f3187704a5423a363b74',
+        'authToken': '045814de6ba224840f5fd98463522995',
+        'fromPhone': '+12178820077'
+    }
 };
+
 
 
 //determine which environment to be exported as command line argument
