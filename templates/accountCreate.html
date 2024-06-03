@@ -1,0 +1,31 @@
+<h1>Sign up</h1>
+<h2>Enter your details to create your account</h2>
+
+<div class="formWrapper">
+    <form id="accountCreate" action="/api/users" method="POST">
+        <div class="formError"></div>
+        <div class="inputWrapper">
+            <div class="inputLabel">First Name:</div>
+            <input type="text" name="firstName" id="" placeholder="Enter first Name" maxlength="15">
+        </div>
+        <div class="inputWrapper">
+            <div class="inputLabel">Last Name:</div>
+            <input type="text" name="lastName" id="" placeholder="Enter Last Name" maxlength="15">
+        </div>
+        <div class="inputWrapper">
+            <div class="inputLabel">Phone Number:</div>
+            <input type="text" name="phone" id="" placeholder="Enter phone number e.g. 0701234567" maxlength="10">
+        </div>
+        <div class="inputWrapper">
+            <div class="inputLabel">Password:</div>
+            <input type="password" name="password" id="" placeholder="Enter password e.g atleast 6 characters">
+        </div>
+        <div class="inputWrapper">
+            <div class="inputLabel">Check the box to agree to Terms and Conditions:</div>
+            <input type="checkbox" name="tosAgreement" id="" value="agree">
+        </div>
+        <div class="inputWrapper ctaWrapper">
+            <button type="submit" class="cta blue">Sign Up</button>
+        </div>
+    </form>
+</div>
