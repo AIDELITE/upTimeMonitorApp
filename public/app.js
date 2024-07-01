@@ -96,7 +96,7 @@ app.bindLogoutButton = function () {
 };
 
 // Log the user out then redirect them
-app.logUserOut = function (redirectUser) {
+app.logUserOut = (redirectUser)=> {
     // Set redirectUser to default to true
     redirectUser = typeof (redirectUser) == 'boolean' ? redirectUser : true;
 
@@ -107,7 +107,7 @@ app.logUserOut = function (redirectUser) {
     var queryStringObject = {
         'id': tokenId
     };
-    app.client.request(undefined, 'api/tokens', 'DELETE', queryStringObject, undefined, function (statusCode, responsePayload) {
+    app.client.request(undefined, 'api/tokens', 'DELETE', queryStringObject, undefined,(statusCode, responsePayload)=> {
         // Set the app.config token as false
         app.setSessionToken(false);
 
